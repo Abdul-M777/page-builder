@@ -4,28 +4,40 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.4.3",
+    "@heroicons/vue": "^1.0.5",
+    "@tailwindcss/postcss7-compat": "^2.2.17",
+    "@vue-hero-icons/outline": "^1.7.2",
+    "@vue-hero-icons/solid": "^1.7.2",
+    "autoprefixer": "^9",
+    "axios": "^0.25.0",
     "core-js": "^3.6.5",
+    "headlessui": "^0.0.0",
+    "install": "^0.13.0",
+    "npm": "^8.4.1",
+    "postcss": "^7",
+    "prismjs": "^1.26.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "uuid": "^8.3.2",
     "vue": "^3.0.0",
+    "vue-prism-editor": "^2.0.0-alpha.2",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vue-unique-id": "^3.2.1",
+    "vue-uuid": "^3.0.0",
+    "vuedraggable": "^4.1.0",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.15",
-    "@vue/cli-plugin-router": "~4.5.15",
-    "@vue/cli-plugin-unit-mocha": "~4.5.15",
-    "@vue/cli-plugin-vuex": "~4.5.15",
-    "@vue/cli-service": "~4.5.15",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
-    "@vue/test-utils": "^2.0.0-0",
-    "chai": "^4.1.2"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "tailwindcss": "^3.0.24"
+  }
 }
