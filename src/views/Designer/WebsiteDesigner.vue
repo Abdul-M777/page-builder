@@ -1,7 +1,8 @@
 <template>
-  <div
-    class="sm:flex sm:grid-cols-6 sm:gap-2 justify-end sm:mx-4 border-b items-center py-4"
-  >
+  <div class="sm:flex justify-center items-center py-4">
+    <h1 class="content-center text-lg">Website Name</h1>
+  </div>
+  <div class="sm:flex sm:grid-cols-6 sm:gap-2 justify-end sm:mx-4 border-b items-center py-4">
     <div class="sm:col-span-6 items-center">
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
@@ -49,15 +50,13 @@
 
   <div class="sm:grid sm:grid-cols-6 sm:gap-2 mt-12 sm:mx-10 min-h-min">
     <!--    start -->
-    <div
-      class="flex flex-col flex-grow border-r border-gray-200 pb-4 bg-white overflow-y-auto"
-    >
+    <div class="flex flex-col flex-grow border-r border-gray-200 pb-4 bg-white overflow-y-auto">
       <div class="flex-grow flex flex-col h-screen">
         <nav aria-label="Sidebar" class="flex-1 px-2 space-y-1">
           <div
             class="text-gray-900 text-gray-600 hover:bg-gray-50 hover:text-gray-900 group w-full flex items-center pl-7 pr-2 py-2 text-sm font-medium cursor-pointer rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
-            ELEMENTER
+            Elements
           </div>
 
           <!--   submenu     -->
@@ -75,7 +74,7 @@
               >
                 <path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
               </svg>
-              Header Sections
+              Sections
             </DisclosureButton>
 
             <DisclosurePanel class="space-y-1">
@@ -133,12 +132,6 @@
         <Footer></Footer>
       </div>
     </div>
-    <CodeEditor
-      :id="elementId"
-      :code="code"
-      :open="editEnabled"
-      @close="editEnabled = false"
-    ></CodeEditor>
 
     <!-- editor sidebar here -->
     <EditorSideMenu
@@ -153,7 +146,6 @@
 <script>
 import WebsiteAdminHeader from "@/components/Header/WebsiteAdminHeader";
 import EditorSideMenu from "@/components/Code-Editor/EditorSideMenu";
-import CodeEditor from "@/components/Code-Editor/CodeEditor.vue";
 import draggable from "vuedraggable";
 import axios from "axios";
 import { onMounted, ref } from "vue";
@@ -181,7 +173,6 @@ export default {
     DisclosureButton,
     DisclosurePanel,
     PencilIcon,
-    CodeEditor,
     Header,
     Footer,
   },
@@ -201,14 +192,6 @@ export default {
     // list2
     const list2 = ref([]);
     //
-    // version: saved pages
-    const savedPageVersionsLocalStorage = ref([
-      "localStorageSavedHTML1",
-      "localStorageSavedHTML2",
-      "localStorageSavedHTML3",
-      "localStorageSavedHTML4",
-      "localStorageSavedHTML5",
-    ]);
 
     //
     // code editor
@@ -247,18 +230,14 @@ export default {
           });
         });
       } catch (err) {
-        console.log(
-          "error trying getting html components. Error message:",
-          err
-        );
+        console.log("error trying getting html components. Error message:", err);
       }
     };
     //
     // edit html elements which are having unique id's
     const startEditListener = function () {
       // find all editable-element's
-      const editableElementsAll =
-        document.querySelectorAll("[editable-element]");
+      const editableElementsAll = document.querySelectorAll("[editable-element]");
 
       // eventlistener on each editable element
       editableElementsAll.forEach((singleHtmlElement) => {
@@ -274,22 +253,6 @@ export default {
     //
     //
     //
-    // code editor for each component html
-    const codeEditor = function (id) {
-      // find all editable-element's
-      const codeEditorHtmlElement = document.querySelectorAll("[code-editor]");
-
-      codeEditorHtmlElement.forEach((singleCodeEditorElement) => {
-        singleCodeEditorElement.addEventListener("click", (e) => {
-          code.value =
-            singleCodeEditorElement.nextElementSibling.innerHTML.toString();
-          code.value =
-            singleCodeEditorElement.nextElementSibling.innerHTML.toString();
-          elementId.value = id;
-          editEnabled.value = true;
-        });
-      });
-    };
 
     const cloneComp = function (comp) {
       // Deep clone component
@@ -316,8 +279,7 @@ export default {
     const moveComponent = function (e, dir) {
       // Declare container of components and current component
       const allComponents = document.querySelector("#pagebuilder").children;
-      const currentComponent =
-        e.currentTarget.parentElement.parentElement.parentElement;
+      const currentComponent = e.currentTarget.parentElement.parentElement.parentElement;
 
       // Get index of chosen component
       const currentIndex = Array.from(allComponents).indexOf(currentComponent);
@@ -343,51 +305,6 @@ export default {
       });
     };
 
-    //
-    // get all html element and save them in local storage: #pagebuilder
-    const saveCurrentDesign = function () {
-      // html array
-      const allAddedHtmlComponents = ref([]);
-
-      // start saving each page
-      // allow to save up to 5 time/version
-      for (let i = 0; i < savedPageVersionsLocalStorage.value.length; i++) {
-        // logic: if no local storage item is taken: (ex: not set for: localStorageSavedHTML1)
-        if (!localStorage.getItem(savedPageVersionsLocalStorage.value[i])) {
-          document.querySelectorAll("[render-html]").forEach((html) => {
-            allAddedHtmlComponents.value.push(html.outerHTML);
-          });
-
-          // add all added html components to local storage
-          localStorage.setItem(
-            savedPageVersionsLocalStorage.value[i],
-            allAddedHtmlComponents.value
-          );
-
-          // break loop if first empty item in local storage is reached in local storage
-          break;
-        }
-
-        //  if all items in local storage is occupied or taken, then save current save/session in localStorageSavedHTML1
-        if (localStorage.getItem(savedPageVersionsLocalStorage.value[4])) {
-          document.querySelectorAll("[render-html]").forEach((html) => {
-            allAddedHtmlComponents.value.push(html.outerHTML);
-          });
-
-          // add all added html components to local storage
-          localStorage.setItem(
-            savedPageVersionsLocalStorage.value[i],
-            allAddedHtmlComponents.value
-          );
-
-          // break loop
-          break;
-        }
-      }
-      // end function
-    };
-    //
-    //
     // preview current design in external browser tab
     const previewCurrentDesign = function () {
       // html array
@@ -425,7 +342,6 @@ export default {
       editEnabled,
       code,
       // elementId,
-      codeEditor,
     };
   },
 };

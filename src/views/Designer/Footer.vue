@@ -5,14 +5,10 @@
         <div class="flex flex-wrap -mx-4">
           <div class="w-full lg:w-1/3 px-4 mb-6 lg:mb-0">
             <p class="mb-6 max-w-sm text-base text-gray-500">
-              Nem og hurtig webshop løsning.
+              This is the footer for Company website.
             </p>
             <div class="flex">
-              <div
-                class="mr-3"
-                v-for="icon in footerData.socialMediaSection"
-                :key="icon.name"
-              >
+              <div class="mr-3" v-for="icon in footerData.socialMediaSection" :key="icon.name">
                 <a :href="icon.url"><i :class="findClass(icon.name)"></i></a>
               </div>
             </div>
@@ -68,8 +64,7 @@
         </div>
       </div>
       <p class="text-center text-sm text-gray-500 pt-8 px-4 border-t">
-        Copyright © 2019-2021 Meeshop Aps - Marielundvej 17F - 2730 Herlev -
-        CVR: 40984593
+        Copyright © 2022 Company - Address
       </p>
     </section>
   </div>

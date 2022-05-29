@@ -2,10 +2,9 @@
   <div>
     <!-- I extensively describe logic in navbar section. here i will just mark differences and new elements. -->
     <TransitionRoot as="template" :show="changeFooterModal">
-      <Modal
-        @change-footer="changeFooterHandler($event)"
-        @close="changeFooterModal = false"
-      />
+      <Modal dialog @change="changeFooterHandler($event)" @close="changeFooterModal = false">
+        <template v-slot:header> Footers </template>
+      </Modal>
     </TransitionRoot>
     <!-- this v-model is quite new syntax for me a always used ".sync" -->
     <FooterEditor
@@ -94,12 +93,12 @@ export default {
       footerData: {
         redirectSection: [
           {
-            title: "Meeshop",
+            title: "About us",
             id: uuidv4(),
             list: [
               {
                 linkId: uuidv4(),
-                url: "https://perzynski.pl/",
+                url: "https://youtube.com/",
                 text: "Redirect to my website",
               },
               {
@@ -110,12 +109,12 @@ export default {
             ],
           },
           {
-            title: "Meeshoppppp2222",
+            title: "Information",
             id: uuidv4(),
             list: [
               {
                 linkId: uuidv4(),
-                url: "https://perzynski.pl/",
+                url: "https://youtube.com/",
                 text: "Redirect to my website",
               },
               {
@@ -129,7 +128,7 @@ export default {
         socialMediaSection: [
           {
             name: "instagram",
-            url: "https://www.facebook.com/",
+            url: "https://www.instagram.com/",
           },
         ],
       },

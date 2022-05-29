@@ -1,10 +1,9 @@
 <template>
   <!-- that is the modal for changing designs -->
   <TransitionRoot as="template" :show="changeNavBarModal">
-    <Modal
-      @change-footer="changeFooterHandler($event)"
-      @close="changeNavBarModal = false"
-    />
+    <Modal @change="changeFooterHandler($event)" @close="changeNavBarModal = false">
+      <template v-slot:header> Headers </template>
+    </Modal>
   </TransitionRoot>
   <!-- editor for footer -->
   <NavBarEditor
