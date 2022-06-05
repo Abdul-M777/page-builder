@@ -1,10 +1,6 @@
 <template>
   <TransitionRoot :show="open" as="template">
-    <Dialog
-      as="div"
-      class="fixed inset-0 overflow-hidden"
-      @close="$emit('close')"
-    >
+    <Dialog as="div" class="fixed inset-0 overflow-hidden" @close="$emit('close')">
       <div class="absolute inset-0 overflow-hidden">
         <DialogOverlay class="absolute inset-0" />
 
@@ -19,9 +15,7 @@
             leave-to="translate-x-full"
           >
             <div class="w-screen max-w-md">
-              <div
-                class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll"
-              >
+              <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
                 <div class="px-4 sm:px-6">
                   <div class="flex items-start justify-between">
                     <DialogTitle class="text-lg font-medium text-gray-900"
@@ -105,9 +99,7 @@
                       name="text-weight"
                       @change="changeFontFamily()"
                     >
-                      <option disabled selected value="">
-                        Default font family
-                      </option>
+                      <option disabled selected value="">Default font family</option>
                       <option
                         v-for="family in families"
                         :key="family"
@@ -145,8 +137,7 @@
                   </div>
 
                   <div class="mb-4">
-                    <label
-                      class="block text-sm font-medium text-gray-900 mb-1 dark:text-gray-100"
+                    <label class="block text-sm font-medium text-gray-900 mb-1 dark:text-gray-100"
                       >Opacity</label
                     >
                     <div class="flex w-full">
@@ -164,16 +155,12 @@
                   </div>
 
                   <div class="mb-4">
-                    <label
-                      class="block text-sm font-medium text-gray-900 mb-1 dark:text-gray-100"
-                    >
+                    <label class="block text-sm font-medium text-gray-900 mb-1 dark:text-gray-100">
                       Text color <i>— choose predefined color</i></label
                     >
 
                     <div class="flex flex-row mb-2">
-                      <label class="mr-3" for="colorpicker"
-                        >Choose custom color</label
-                      >
+                      <label class="mr-3" for="colorpicker">Choose custom color</label>
                       <input
                         id="colorpicker-txt"
                         v-model="customTextColor"
@@ -195,9 +182,7 @@
                   </div>
 
                   <div class="mb-4">
-                    <label
-                      class="block text-sm font-medium text-gray-900 mb-1 dark:text-gray-100"
-                    >
+                    <label class="block text-sm font-medium text-gray-900 mb-1 dark:text-gray-100">
                       Background color <i>— choose predefined color</i></label
                     >
                     <div class="grid grid-cols-11 gap-1">
@@ -469,9 +454,7 @@ export default {
     const changeOpacity = function () {
       opacities.value.forEach((opacitySingle) => {
         props.element.classList.remove(`opacity-${opacitySingle}`);
-        props.element.classList.add(
-          `opacity-${opacities.value[opacityIndex.value]}`
-        );
+        props.element.classList.add(`opacity-${opacities.value[opacityIndex.value]}`);
       });
     };
 

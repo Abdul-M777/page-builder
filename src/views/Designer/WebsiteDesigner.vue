@@ -6,6 +6,7 @@
     <div class="sm:col-span-6 items-center">
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
+        @click="save()"
       >
         <span class="pr-2">Save</span>
         <svg
@@ -326,6 +327,29 @@ export default {
       window.open(routeData.href, "_blank");
       // end function
     };
+
+    const save = async function () {
+      // await axios.get("http://localhost:8000/api/website-page").then((res) => {
+      //   console.log(res.data);
+      // });
+
+      const page = [...document.querySelectorAll(["#app"])];
+
+      let data;
+
+      page.forEach((element) => {
+        data = element;
+        // console.log(data.innerHTML);
+      });
+      console.log(data);
+
+      const htmlpage = { title: "Page", body: data.innerHTML, userId: 1 };
+      const headers = { "Content-Type": "application/json" };
+
+      await axios.post("http://localhost:8000/api/website-page", htmlpage, headers).then((res) => {
+        console.log(res.data);
+      });
+    };
     //
     //
     //
@@ -341,6 +365,7 @@ export default {
       htmlElementSelectorItem,
       editEnabled,
       code,
+      save,
       // elementId,
     };
   },

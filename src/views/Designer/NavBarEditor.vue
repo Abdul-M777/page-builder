@@ -9,178 +9,161 @@
       <div class="absolute inset-0 w-full" @click="hide()"></div>
 
       <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
-        <div
-          class="bg-white shadow-xl dark:bg-gray-dark relative w-screen max-w-md"
-        >
-          <div
-            class="absolute top-0 right-5 ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4"
-          >
-            <button
-              class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-            >
-              <svg
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-                @click="hide()"
+        <div class="bg-white shadow-xl dark:bg-gray-dark relative w-screen max-w-md">
+          <div class="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
+            <div class="absolute top-0 right-5 ml-8 pt-4 pr-2 flex sm:-ml-10 sm:pr-4">
+              <button
+                class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-
-          <div
-            class="h-full flex flex-col py-6 bg-white shadow-xl mt-14 dark:bg-gray-dark"
-          >
-            <div class="px-4 sm:px-6">
-              <h2
-                class="text-lg font-medium text-gray-900 dark:text-gray-100"
-                id="slide-over-title"
-              >
-                Edit element
-              </h2>
+                <svg
+                  class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  @click="hide()"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
             </div>
-            <div class="mt-6 relative flex-1 px-4 sm:px-6">
-              <div class="absolute inset-0 px-4 sm:px-6">
-                <div class="h-full" aria-hidden="true">
-                  <!-- LinksSections -->
-                  <div class="flex flex-col">
-                    <!-- iterating over data and depending on this data we rendering elements. Manipulate DOM by data is recommended in vue and this is example. -->
-                    <div
-                      v-for="element in dataDeepCopy.redirectSection"
-                      :key="element.id"
-                    >
-                      <!-- condition to show only target element -->
-                      <div v-if="element.id == targetId" class="pt-10">
-                        Title
-                        <input
-                          v-model="element.title"
-                          type="text"
-                          class="appearance-none block w-full mb-5 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
 
-                        <div class="mb-5">
-                          URL
-
+            <div class="h-full flex flex-col py-6 bg-white shadow-xl mt-14 dark:bg-gray-dark">
+              <div class="px-4 sm:px-6">
+                <h2
+                  class="text-lg font-medium text-gray-900 dark:text-gray-100"
+                  id="slide-over-title"
+                >
+                  Edit element
+                </h2>
+              </div>
+              <div class="mt-6 relative flex-1 px-4 sm:px-6">
+                <div class="absolute inset-0 px-4 sm:px-6">
+                  <div class="h-full" aria-hidden="true">
+                    <!-- LinksSections -->
+                    <div class="flex flex-col">
+                      <!-- iterating over data and depending on this data we rendering elements. Manipulate DOM by data is recommended in vue and this is example. -->
+                      <div v-for="element in dataDeepCopy.redirectSection" :key="element.id">
+                        <!-- condition to show only target element -->
+                        <div v-if="element.id == targetId" class="pt-10">
+                          Title
                           <input
-                            v-model="element.url"
+                            v-model="element.title"
                             type="text"
-                            class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            class="appearance-none block w-full mb-5 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           />
 
-                          <!-- Iterating over the menus in element -->
-                          <div
-                            v-for="menu in element.menu"
-                            :key="menu.id"
-                            class="mb-5"
-                          >
-                            Name
-                            <input
-                              type="text"
-                              v-model="menu.name"
-                              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            />
+                          <div class="mb-5">
                             URL
+
                             <input
-                              v-model="menu.url"
+                              v-model="element.url"
                               type="text"
                               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             />
 
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              @click="deleteLink(menu.id)"
-                              :id="menu.id"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            <!-- Iterating over the menus in element -->
+                            <div v-for="menu in element.menu" :key="menu.id" class="mb-5">
+                              Name
+                              <input
+                                type="text"
+                                v-model="menu.name"
+                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                               />
-                            </svg>
+                              URL
+                              <input
+                                v-model="menu.url"
+                                type="text"
+                                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                              />
+
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                @click="deleteLink(menu.id)"
+                                :id="menu.id"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- When clicking on a menu element, and not on the parent -->
+                        <div
+                          v-else-if="element.menu.find((x) => x.id === targetMenuId)"
+                          class="pt-10"
+                        >
+                          Name
+                          <input
+                            v-model="element.menu.find((x) => x.id === targetMenuId).name"
+                            type="text"
+                            class="appearance-none block w-full mb-5 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          />
+                          URL
+                          <input
+                            v-model="element.menu.find((x) => x.id === targetMenuId).url"
+                            type="text"
+                            class="appearance-none block w-full mb-5 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                          />
+
+                          <button
+                            @click="save()"
+                            class="basis-full w-full btn bg-green-500 font-bold mb-3"
+                          >
+                            Save
+                          </button>
+
+                          <div>
+                            <button
+                              @click="deleteLink(targetMenuId)"
+                              class="basis-full w-full btn bg-red-500 font-bold mt-3 mb-3"
+                            >
+                              Delete
+                            </button>
                           </div>
                         </div>
                       </div>
-                      <!-- When clicking on a menu element, and not on the parent -->
-                      <div
-                        v-else-if="
-                          element.menu.find((x) => x.id === targetMenuId)
-                        "
-                        class="pt-10"
+
+                      <!-- Some buttons should not appear on all elements -->
+
+                      <button
+                        v-if="!targetMenuId"
+                        @click="save()"
+                        class="basis-full btn bg-green-500 font-bold mb-3"
                       >
-                        Name
-                        <input
-                          v-model="
-                            element.menu.find((x) => x.id === targetMenuId).name
-                          "
-                          type="text"
-                          class="appearance-none block w-full mb-5 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                        URL
-                        <input
-                          v-model="
-                            element.menu.find((x) => x.id === targetMenuId).url
-                          "
-                          type="text"
-                          class="appearance-none block w-full mb-5 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+                        Save
+                      </button>
+                      <!-- When clicking on menu element Add Sub Menu button should not appear -->
+                      <button
+                        v-if="!targetMenuId"
+                        @click="addMenu()"
+                        class="basis-full btn bg-green-500 font-bold mb-3"
+                      >
+                        Add Sub Menu
+                      </button>
 
-                        <button
-                          @click="save()"
-                          class="basis-full w-full btn bg-green-500 font-bold mb-3"
-                        >
-                          Save
-                        </button>
-
-                        <div>
-                          <button
-                            @click="deleteLink(targetMenuId)"
-                            class="basis-full w-full btn bg-red-500 font-bold mt-3 mb-3"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
+                      <button
+                        v-if="showDelete && !targetMenuId"
+                        @click="deleteElement()"
+                        class="basis-full btn bg-red-500 font-bold"
+                      >
+                        Delete
+                      </button>
                     </div>
-
-                    <!-- Some buttons should not appear on all elements -->
-
-                    <button
-                      v-if="!targetMenuId"
-                      @click="save()"
-                      class="basis-full btn bg-green-500 font-bold mb-3"
-                    >
-                      Save
-                    </button>
-                    <!-- When clicking on menu element Add Sub Menu button should not appear -->
-                    <button
-                      v-if="!targetMenuId"
-                      @click="addMenu()"
-                      class="basis-full btn bg-green-500 font-bold mb-3"
-                    >
-                      Add Sub Menu
-                    </button>
-
-                    <button
-                      v-if="showDelete && !targetMenuId"
-                      @click="deleteElement()"
-                      class="basis-full btn bg-red-500 font-bold"
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
               </div>
@@ -249,11 +232,6 @@ export default {
           });
         }
       });
-
-      // Do Before the end of your internhip:
-      // Fix your DropDown and maybe you need to change the logic.
-      // Make it so the header generates only html and not vue.
-      // Do this and than create a new project where you create the header with vuejs but it should be like Joachim.
     },
     deleteElement() {
       // Delete the whole menu with submenu.
